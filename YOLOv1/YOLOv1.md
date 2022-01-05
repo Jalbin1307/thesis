@@ -3,7 +3,7 @@ Unified, Real-Time Object Detection
 
 Author: Joseph Redmon, Santosh Divvala, Ross Girshick, Ali Farhadi
 Journal: Computer Vision and Pattern Recognition
-PDF: You%20Only%20Look%20Once%20Unified,%20Real-Time%20Object%20Detec%20282b5157f1ba4300856891e362e46bde/YOLOv1.pdf
+PDF: YOLOv1/YOLOv1.pdf
 Published Date: 2016년 5월 9일
 keyword: Object Detection
 link: https://arxiv.org/pdf/1506.02640.pdf
@@ -45,7 +45,7 @@ We reframe object detection as a single regression problem, straight from image 
 
 YOLO is refreshingly simple.
 
-![Untitled](You%20Only%20Look%20Once%20Unified,%20Real-Time%20Object%20Detec%20282b5157f1ba4300856891e362e46bde/Untitled.png)
+![Untitled](YOLOv1/Untitled.png)
 
 First, YOLO is extremely fast. Since we frame detection as a regression problem we don’t need a complex pipeline.
 
@@ -82,7 +82,7 @@ we define confidence as Pr(Object) ∗ IOUtruth/pred.
 
 Otherwise we want the confidence score to equal the intersection over union (IOU) between the predicted box and the ground truth.
 
-![Untitled](You%20Only%20Look%20Once%20Unified,%20Real-Time%20Object%20Detec%20282b5157f1ba4300856891e362e46bde/Untitled%201.png)
+![Untitled](YOLOv1/Untitled%201.png)
 
 Each bounding box consists of 5 predictions: x, y, w, h, and confidence. 
 
@@ -96,7 +96,7 @@ number of boxes B.
 
 At test time we multiply the conditional class probabilities and the individual box confidence predictions
 
-![Untitled](You%20Only%20Look%20Once%20Unified,%20Real-Time%20Object%20Detec%20282b5157f1ba4300856891e362e46bde/Untitled%202.png)
+![Untitled](YOLOv1/Untitled%202.png)
 
 These scores encode both the probability of that class appearing in the box and how well the predicted box fits the object.
 
@@ -114,7 +114,7 @@ we simply use 1 x 1 reduction layers followed by 3 x 3 convolutional layers, sim
 
 Fast YOLO uses a neural network with fewer convolutional layers (9 instead of 24)
 
-![Untitled](You%20Only%20Look%20Once%20Unified,%20Real-Time%20Object%20Detec%20282b5157f1ba4300856891e362e46bde/Untitled%203.png)
+![Untitled](YOLOv1/Untitled%203.png)
 
 # 2.2. Training
 
@@ -133,7 +133,7 @@ Our final layer predicts both class probabilities and bounding box coordinates.
 
 We use a linear activation function for the final layer and all other layers use the following leaky rectified linear activation:
 
-![Untitled](You%20Only%20Look%20Once%20Unified,%20Real-Time%20Object%20Detec%20282b5157f1ba4300856891e362e46bde/Untitled%204.png)
+![Untitled](YOLOv1/Untitled%204.png)
 
 We optimize for sum-squared error in the output of our model.
 
@@ -153,7 +153,7 @@ prediction has the highest current IOU with the ground truth.
 
 This leads to specialization between the bounding box predictors.
 
-![Untitled](You%20Only%20Look%20Once%20Unified,%20Real-Time%20Object%20Detec%20282b5157f1ba4300856891e362e46bde/Untitled%205.png)
+![Untitled](YOLOv1/Untitled%205.png)
 
 Our learning rate schedule is as follows: For the first epochs we slowly raise the learning rate from 10^-3 to 10^-2. 
 
@@ -209,9 +209,9 @@ We also present VOC 2012 results and compare mAP to current state-of-the-art met
 
 YOLO generalizes to new domains better than other detectors on two artwork datasets.
 
-![Untitled](You%20Only%20Look%20Once%20Unified,%20Real-Time%20Object%20Detec%20282b5157f1ba4300856891e362e46bde/Untitled%206.png)
+![Untitled](YOLOv1/Untitled%206.png)
 
-![Untitled](You%20Only%20Look%20Once%20Unified,%20Real-Time%20Object%20Detec%20282b5157f1ba4300856891e362e46bde/Untitled%207.png)
+![Untitled](YOLOv1/Untitled%207.png)
 
 YOLO struggles to localize objects correctly. Localization errors account for more of YOLO’s errors than all other sources combined. Fast R-CNN makes much fewer localization errors but far more background errors. 13.6% of it’s top detections are false positives that don’t contain any objects.
 
