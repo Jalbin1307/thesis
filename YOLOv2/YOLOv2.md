@@ -3,7 +3,7 @@ Better, Faster, Stronger
 
 Author: Joseph Redmon, Ali Farhadi
 Journal: Computer Vision and Pattern Recognition
-PDF: YOLO9000%20Better,%20Faster,%20Stronger%20f61dbbac5f8f4a6994cb7634f235533e/YOLOv2.pdf
+PDF: YOLOv2/YOLOv2.pdf
 Published Date: 2016년 12월 25일
 keyword: Object Detection
 link: https://arxiv.org/pdf/1612.08242.pdf
@@ -32,7 +32,7 @@ Using this method we train YOLO9000, a real-time object detector that can detect
 
 # 2. Better
 
-![Untitled](YOLO9000%20Better,%20Faster,%20Stronger%20f61dbbac5f8f4a6994cb7634f235533e/Untitled.png)
+![Untitled](YOLOv2/Untitled.png)
 
 YOLO makes a significant number of localization errors.
 
@@ -40,7 +40,7 @@ YOLO has relatively low recall compared to region proposal-based methods.
 
 Thus we focus mainly on improving recall and localization while maintaining classification accuracy.
 
-![Untitled](YOLO9000%20Better,%20Faster,%20Stronger%20f61dbbac5f8f4a6994cb7634f235533e/Untitled%201.png)
+![Untitled](YOLOv2/Untitled%201.png)
 
 **Batch Normalization**
 
@@ -83,11 +83,11 @@ we run k-means clustering on the training set bounding boxes to automatically fi
 
 If we use standard k-means with Euclidean distance larger boxes generate more error than smaller boxes.
 
-![Untitled](YOLO9000%20Better,%20Faster,%20Stronger%20f61dbbac5f8f4a6994cb7634f235533e/Untitled%202.png)
+![Untitled](YOLOv2/Untitled%202.png)
 
 We choose k = 5 as a good tradeoff between model complexity and high recall.
 
-![Untitled](YOLO9000%20Better,%20Faster,%20Stronger%20f61dbbac5f8f4a6994cb7634f235533e/Untitled%203.png)
+![Untitled](YOLOv2/Untitled%203.png)
 
 If we use 9 centroids we see a much higher average IOU. This indicates that using k-means to generate our bounding box starts the model off with a better representation and makes the task easier to learn.
 
@@ -99,7 +99,7 @@ Most of the instability comes from predicting the (x, y) locations for the box.
 
 In region proposal networks the network predicts values tx and ty and the (x, y) center coordinates are calculated as : 
 
-![Untitled](YOLO9000%20Better,%20Faster,%20Stronger%20f61dbbac5f8f4a6994cb7634f235533e/Untitled%204.png)
+![Untitled](YOLOv2/Untitled%204.png)
 
 We use a logistic activation to constrain the network’s predictions to fall in this range.
 
@@ -107,7 +107,7 @@ The network predicts 5 coordinates for each bounding box, tx, ty, tw, th, and to
 
 If the cell is offset from the top left corner of the image by (cx, cy) and the bounding box prior has width and height pw, ph, then the predictions correspond to:
 
-![Untitled](YOLO9000%20Better,%20Faster,%20Stronger%20f61dbbac5f8f4a6994cb7634f235533e/Untitled%205.png)
+![Untitled](YOLOv2/Untitled%205.png)
 
 Since we constrain the location prediction the parametrization is easier to learn, making the network
 more stable.
@@ -123,7 +123,7 @@ We take a different approach, simply adding a passthrough layer that brings feat
 
 This gives a modest 1% performance increase.
 
-![Untitled](YOLO9000%20Better,%20Faster,%20Stronger%20f61dbbac5f8f4a6994cb7634f235533e/Untitled%206.png)
+![Untitled](YOLOv2/Untitled%206.png)
 
 **Multi-Scale Training.**
 
@@ -155,7 +155,7 @@ We use batch normalization to stabilize training, speed up convergence, and regu
 
 Our final model, called Darknet-19, has 19 convolutional layers and 5 maxpooling layers.
 
-![Untitled](YOLO9000%20Better,%20Faster,%20Stronger%20f61dbbac5f8f4a6994cb7634f235533e/Untitled%207.png)
+![Untitled](YOLOv2/Untitled%207.png)
 
 # 4. Stronger
 
@@ -169,11 +169,11 @@ We could instead use a multi-label model to combine the datasets which does not 
 
 ImageNet labels are pulled from WordNet, a language database that structures concepts and how they relate.
 
-![Untitled](YOLO9000%20Better,%20Faster,%20Stronger%20f61dbbac5f8f4a6994cb7634f235533e/Untitled%208.png)
+![Untitled](YOLOv2/Untitled%208.png)
 
 To compute the conditional probabilities our model predicts a vector of 1369 values and we compute the softmax over all sysnsets that are hyponyms of the same concept, see Figure 5.
 
-![Untitled](YOLO9000%20Better,%20Faster,%20Stronger%20f61dbbac5f8f4a6994cb7634f235533e/Untitled%209.png)
+![Untitled](YOLOv2/Untitled%209.png)
 
 **Dataset combination with WordTree.**
 
@@ -181,7 +181,7 @@ We can use WordTree to combine multiple datasets together in a sensible fashion.
 
 Figure 6 shows an example of using WordTree to combine the labels from ImageNet and COCO.
 
-![Untitled](YOLO9000%20Better,%20Faster,%20Stronger%20f61dbbac5f8f4a6994cb7634f235533e/Untitled%2010.png)
+![Untitled](YOLOv2/Untitled%2010.png)
 
 **Joint classification and detection.**
 
